@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Babushka</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <template>
+      <article>
+        <img src="" alt="" />
+        <div class="content">
+          <h3 class="title"></h2>
+          <h4 class="description_short"></h3>
+          <p class="price"></p>
+        </div>
+      </article>
+    </template>
+    <main>
+      <nav id="filter_menu">
+          <p>Filter:</p>
+        <div id="filter">
+          <button data-category="alle" class="selected disabled">Alle</button>
+          <button data-category="hovedretter" class="disabled">Hovedretter</button>
+          <button data-category="sideorders" class="disabled">Sideorders</button>
+          <button data-category="drikkevarer" class="disabled">Drikkevarer</button>
+          <button data-category="desserter" class="disabled">Desserter</button>
+        </div>
+      </nav>
+      <h2>Alle</h2>
+      <section id="section"></section>
+    </main>
+    <script src="javascript/load-data.js"></script>
+  </body>
+</html>
