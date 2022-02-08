@@ -9,18 +9,21 @@
   </head>
   <body>
     <template>
-      <article>
+      <article class="card">
         <img src="" alt="" />
         <div class="content">
-          <h3 class="title"></h2>
-          <h4 class="description_short"></h3>
+          <h3 class="title"></h3>
+          <h4 class="description_short"></h4>
           <p class="price"></p>
         </div>
       </article>
     </template>
+    <header id="banner">
+      <h1>Bistro Babushka</h1>
+    </header>
     <main>
       <nav id="filter_menu">
-          <p>Filter:</p>
+        <p>Filter:</p>
         <div id="filter">
           <button data-category="alle" class="selected disabled">Alle</button>
           <button data-category="hovedretter" class="disabled">Hovedretter</button>
@@ -32,6 +35,49 @@
       <h2>Alle</h2>
       <section id="section"></section>
     </main>
+    <footer>
+      <h2>Åbningstider:</h2>
+      <section id="opening_time">
+        <span>
+          <p>Mandag:</p>
+          <p>12:30 - 21:00</p>
+        </span>
+        <span>
+          <p>Tirsdag:</p>
+          <p>12:30 - 21:00</p>
+        </span>
+        <span>
+          <p>Onsdag:</p>
+          <p>11:30 - 21:00</p>
+        </span>
+        <span>
+          <p>Tordag:</p>
+          <p>11:30 - 21:00</p>
+        </span>
+        <span>
+          <p>Fredag:</p>
+          <p>15:30 - 23:00</p>
+        </span>
+        <span>
+          <p>Lørdag:</p>
+          <p>16:30 - 23:00</p>
+        </span>
+        <span>
+          <p>Søndag:</p>
+          <p>LUKKET</p>
+        </span>
+      </section>
+    </footer>
+    <section id="popup">
+      <article>
+        <div id="close">&#x2715;</div>
+        <img class="pop_up_img" src="" alt="" />
+        <h2 class="title"></h2>
+        <p class="description_long"></p>
+        <p class="origin"></p>
+        <p class="price"></p>
+      </article>
+    </section>
     <script src="javascript/load-data.js"></script>
   </body>
 </html>

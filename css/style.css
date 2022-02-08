@@ -12,11 +12,26 @@ img {
 
 body {
   background-color: hsl(36, 100%, 95%);
+  transition: background-color 0.4s;
 }
 
 main {
   display: grid;
   grid-template-columns: 8px auto minmax(0, 1200px) auto 8px;
+}
+
+#banner {
+  grid-column: 1/6;
+  padding-block: min(64px, 5vw);
+  background-color: hsl(5, 85%, 15%);
+  margin-bottom: 60px;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  font-size: clamp(3.75rem, -0.87rem + 18.48vw, 8rem);
+  color: hsl(5, 80%, 40%);
 }
 
 #filter_menu {
@@ -40,15 +55,16 @@ nav p {
   transform: translateY(0.1rem);
 }
 
-section {
+section#section {
   grid-column: 3/4;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 20px;
   margin-top: 2rem;
+  margin-bottom: 180px;
 }
 
-article {
+article.card {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -57,6 +73,21 @@ article {
   box-shadow: 4px 4px 20px -2px rgba(0, 0, 0, 0.25);
   animation-name: kf_fade-in;
   animation-duration: 0.75s;
+  cursor: pointer;
+  transition: background-color 0.3s, border-radius 0.3s;
+}
+
+article.card:hover {
+  background-color: hsl(36, 70%, 85%);
+  border-radius: 20px;
+}
+
+article.card img {
+  transition: filter 0.3s;
+}
+
+article.card:hover img {
+  filter: brightness(0.9);
 }
 
 .content {
@@ -82,7 +113,9 @@ h3.title {
   color: hsl(5, 60%, 40%);
 }
 
-h4.description_short {
+h4.description_short,
+.description_long,
+.origin {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-weight: normal;
@@ -109,6 +142,11 @@ button {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+button:hover {
+  background-color: hsla(5, 60%, 40%, 0.15);
 }
 
 button.selected {
@@ -123,11 +161,177 @@ button.disabled {
   pointer-events: none;
 }
 
+#popup {
+  opacity: 0;
+  z-index: -1;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  margin: 0;
+}
+
+#popup.viewing {
+  animation-name: kf_fade-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  z-index: 1;
+}
+
+#popup.closing {
+  animation-name: kf_fade-out;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  z-index: -1;
+  opacity: 0;
+}
+
+#popup.closing article {
+  animation-name: kf_popup_exit;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+#popup article {
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: hsl(36, 100%, 90%);
+  box-shadow: 4px 4px 20px -2px rgba(0, 0, 0, 0.25);
+  overflow-y: scroll;
+  width: 90vw;
+  height: 90vh;
+  max-width: 720px;
+  padding: 0 8px 8px 8px;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+#popup.viewing article {
+  animation-name: kf_popup;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.25s;
+}
+
+.pop_up_img {
+  border-radius: 8px;
+}
+
+#close {
+  position: relative;
+  padding: 4px 12px;
+  font-size: 32px;
+  font-weight: bolder;
+  cursor: pointer;
+  margin: 0 0 0 auto;
+  color: hsl(5, 60%, 40%);
+}
+
+.description_long,
+.origin {
+  text-align: justify;
+  padding-inline: 24px;
+  font-size: 1.1rem;
+}
+
+#popup * {
+  scrollbar-width: auto;
+  scrollbar-color: #a53329 transparent;
+}
+
+#popup *::-webkit-scrollbar {
+  width: 16px;
+}
+
+#popup *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#popup *::-webkit-scrollbar-thumb {
+  background-color: #a53329;
+  border-radius: 8px;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 40px auto minmax(0, 768px) auto 40px;
+  padding-block: 40px;
+  background-color: hsl(36, 30%, 65%);
+}
+
+footer h2 {
+  font-size: 3rem;
+}
+
+#opening_time {
+  grid-column: 3/4;
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 20px;
+}
+
+#opening_time span {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-family: "Roboto", sans-serif;
+  color: hsl(36, 30%, 25%);
+}
+
 @keyframes kf_fade-in {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes kf_fade-out {
+  0% {
+    opacity: 1;
+    z-index: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    z-index: -1;
+  }
+}
+
+@keyframes kf_popup {
+  0% {
+    opacity: 0;
+    transform: translateY(10vh);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes kf_popup_exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-20vh);
+    opacity: 0;
   }
 }
