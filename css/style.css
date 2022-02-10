@@ -36,14 +36,16 @@ h1 {
 
 #filter_menu {
   grid-column: 3/4;
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 #filter {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  flex-grow: 1;
   gap: 8px;
 }
 
@@ -284,6 +286,21 @@ footer h2 {
   font-size: 1.25rem;
   font-family: "Roboto", sans-serif;
   color: hsl(36, 30%, 25%);
+}
+
+@media (max-width: 540px) {
+  #filter_menu {
+    flex-direction: column;
+  }
+
+  #filter {
+    flex-direction: column;
+  }
+
+  button {
+    margin: 0;
+    padding-inline: auto;
+  }
 }
 
 @keyframes kf_fade-in {
